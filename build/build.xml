@@ -5,8 +5,8 @@
 	<tstamp>
 		<format property="date-time" pattern="yyyy-MM-dd HH:mm:ss" />
 	</tstamp>
-	<property name="classes" value="build/classes" />
-
+	<property name="classes" value="classes" />
+        <property name="src" value="../src"/>
 	<!-- 显示信息 -->
 	<target name="show" depends="init">
 		<echo message="OS:(${os.name}) Arch:(${os.arch}) Version:(${os.version})" />
@@ -22,7 +22,7 @@
 
 	<!-- 编译Java代码 -->
 	<target name="compile" depends="show">
-		<javac srcdir="src" destdir="${classes}">
+		<javac srcdir="${src}" destdir="${classes}">
 			<compilerarg line="-encoding UTF-8" />
 		</javac>
 	</target>
