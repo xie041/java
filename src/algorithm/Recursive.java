@@ -59,4 +59,45 @@ public class Recursive {
 		System.out.println(factorial(6));
 		System.out.println(factorial(0));
 	}
+
+
+	/**
+	 * <pre>
+	 * 需求：将目录下面的某个文件重命名-根据目录-并移动位置
+	 * @return
+	 * </pre>
+	 */
+	public static void main (String[] args) {
+    		refreshFileList("G:\\java\\ajax");
+	}
+
+    	public static void refreshFileList(String path){
+    		File dir = new File(path);
+    		File[] files = dir.listFiles();
+    		if(files == null) return;
+    		for(int i=0;i<files.length;i++){
+	    		if(files[i].isDirectory()){
+	    			refreshFileList(files[i].getAbsolutePath());
+	    		}else{
+				
+				//修改avi文件的名字
+				File f1 = files[i];
+				if(f1.getName().contains(".avi")){
+					//avi文件，则重命名为目录一样的名字
+					String p = f1.getParent();//父目录
+					//new File().getParent()
+					String docName = p.substring(p.lastIndexOf("\\")+1,p.length()-4);//文件名
+
+					String fname = "G:\\java\\ajax\\"+docName+".avi";//指定新文件的位置
+					File newFile = new File(fname);
+
+					boolean bln = f1.renameTo(newFile);
+					
+					System.out.println(fname);
+				}
+    			}
+
+
+    		}
+    	}
 }
