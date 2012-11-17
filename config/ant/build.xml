@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant" basedir="." default="compile">
+
+	<!-- 构建日期 -->
+	<tstamp>
+		<format property="date-time" pattern="yyyy-MM-dd HH:mm:ss" />
+	</tstamp>
+	<property name="classes" value="classes" />
+        <property name="src" value="../src"/>
+	<!-- 显示信息 -->
+	<target name="show" depends="init">
+		<echo message="OS:(${os.name}) Arch:(${os.arch}) Version:(${os.version})" />
+		<echo message="JDK:${java.home}" />
+		<echo message="ANT：(${ant.home}) Version:(${ant.version})" />
+		<echo message="execute time:${date-time}" />
+	</target>
+
+	<!-- 创建目录结构 -->
+	<target name="init">
+		<mkdir dir="${classes}" />
+	</target>
+
+	<!-- 编译Java代码 -->
+	<target name="compile" depends="show">
+		<javac srcdir="${src}" destdir="${classes}">
+			<compilerarg line="-encoding UTF-8" />
+		</javac>
+	</target>
+</project>
