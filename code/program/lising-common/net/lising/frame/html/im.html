@@ -1,0 +1,312 @@
+<div class="im-panel" id="im_panel">
+	<div id="widerPanel">
+		<!-- 常规宽度面板 -->
+		<div class="im-bd wrap167">
+			<!-- 头部选项卡 -->
+			<ul class="tabs qq-border-im clearfix">
+				<li><a><span>私聊</span></a></li>
+				<li onclick="fn_im_recent_contact();" class="last"><a><span>最近</span></a></li>
+			</ul>
+			<div class="qq-chat-search">
+				<a href="javascript:showFindFriend();" class="qq-icon-search qq-bg-im" title="搜索好友"></a>
+				<input id="findfriend0" type="text" value="搜索好友" class="qq-search-input" onFocus="inFriend();" title="搜索好友"/>
+			</div>
+			<div id="friendBox" class="qq-scrollbox qq-border-im" style="height: 348px;">
+				<div id="scrollcontent1" class="panes qq-chat-scrollbody clearfix">
+				<!-- 面板分组 -->
+					<div class="friend-alone friend-item">
+						<div class="content-h">
+							<dl id="group_list_0">
+								<dt class="im-close" id="im_dt0" onclick="toggleFriends('0')">
+									<div class="friend-item-title" id="im_group_0">在线咨询&nbsp;&nbsp;[1/1]</div>
+								</dt>
+								<dd>
+									<div class="qq-user-item" id="friend_0" ondblclick="fn_send_msg('广播通道',0)">
+										<div class="qq-user-pic">
+											<img src="'{HFS-SERVER-URL}'statics/im/images/im-default.gif" id="im_img_0" />
+										</div>
+										<p class="qq-user-name">客服</p>
+										<div class="qq-desc-online color-green">在线</div>
+										<div class="qq-icon-online">在线</div>
+									</div>
+								</dd>
+							</dl>
+							<dl id="group_list_1">
+								<dt class="im-close" id="im_dt1" onclick="toggleFriends('1')"><div class="friend-item-title" id="im_group_1">我的好友</div></dt>
+							</dl>
+							<dl id="group_list_2">
+								<dt class="im-close" id="im_dt2" onclick='toggleFriends(2)'><div class="friend-item-title" id="im_group_2">公司同事 &nbsp;&nbsp;[<span id="im_groupUserCount_2"></span>]</div></dt>
+							</dl>
+							<dl id="group_list_3">
+								<dt class="im-close" id="im_dt3" onclick='toggleFriends(3)'><div class="friend-item-title" id="im_group_3">陌生人</div> </dt>
+							</dl>
+							<dl id="group_list_4">
+								<dt class="im-close" id="im_dt4" onclick='toggleFriends(4)'><div class="friend-item-title" id="im_group_4">批发商 &nbsp;&nbsp;[<span id="im_groupUserCount_4"></span>]</div></dt>
+							</dl>
+							<dl id="group_list_5">
+								<dt class="im-close" id="im_dt5" onclick='toggleFriends(5)'><div class="friend-item-title" id="im_group_5">供应商 &nbsp;&nbsp;[<span id="im_groupUserCount_5"></span>]</div></dt>
+							</dl>
+							<dl id="group_list_6">
+								<dt class="im-close" id="im_dt6" onclick='toggleFriends(6)'><div class="friend-item-title" id="im_group_6">组团社 &nbsp;&nbsp;[<span id="im_groupUserCount_6"></span>]</div></dt>
+							</dl>
+							<dl id="group_list_7">
+								<dt class="im-close" id="im_dt7" onclick='toggleFriends(7)'><div class="friend-item-title" id="im_group_7">地接社 &nbsp;&nbsp;[<span id="im_groupUserCount_7"></span>]</div></dt>
+							</dl>
+						</div>
+					</div>
+			
+					<div class="friend-group friend-item">
+						<div class="content-h">
+							<dl id="im_recent_contact">
+							</dl>
+						</div>
+					</div>
+<!--					<div class="friend-email friend-item">-->
+<!--						<div class="content-t clearfix"><a class="fr" href="">查看全部</a></div>-->
+<!--						<div class="content-h">-->
+<!--						</div>-->
+<!--					</div>		-->
+				</div>	
+<!--				<div id="scrollbar1" class="qq-chat-scrollbar">-->
+<!--					<div id="scroller1" class="qq-chat-scrolling">-->
+<!--					</div>-->
+<!--				</div>-->
+			</div>
+			
+			
+			<div class="qq-chat-title qq-bg-im" style="border-top: none;">
+				<div id="sbar" class="qq-chat-separator">
+					<div class="qq-chat_sbar_l"></div>
+					<div class="qq-chat_sbar_2"></div>
+				</div>
+				<h5>消息提醒</h5>
+			</div>
+			<div id="sysMsgBox" class="qq-scrollbox qq-sysmsg-scrollbox qq-border-im" style="height: 197px;">
+				<!-- 公司订单消息 -->
+				<ul id="im_compmessage" class="qq-chat-scrollbody"></ul>
+			</div>
+			
+			<a class="ico-arrow-bar" href="javascript:fn_im_small_friend();" title="收缩">
+				<span class="ico-arrow qq-bg-im">&gt;</span>
+			</a>
+		</div>
+		<!-- 常规宽度面板 end -->
+	</div>
+	
+	<!-- 缩小的面板 -->
+	<div id="narrowerPanel" style="display: none;">
+		<div class="im-bd wrap67">
+			<div class="qq-chat-title qq-bg-im" style="border-width: 0 1px;">
+				<h5>最近</h5>
+			</div>
+			<div class="qq-scrollbox">
+				<div id="friendWrap" class="qq-border-im clearfix">
+					<div class="friend-alone friend-item">
+						<div class="content-h">
+							<dl id="group_list_small">
+						</div>
+					</div>
+			
+					<div class="friend-group friend-item">
+						<div class="content-h">
+							<dl id="im_recent_contact">
+							</dl>
+						</div>
+					</div>
+					<div class="friend-email friend-item">
+						<div class="content-t clearfix"><a class="fr" href="javascript:fn_im_big_friend();">查看全部</a></div>
+						<div class="content-h">
+						</div>
+					</div>				
+				</div>
+				<div class="qq-chat-scrollbar">
+					<div class="qq-chat-scrolling"></div>
+				</div>
+			</div>
+				
+			<div class="qq-chat-search qq-bg-im">
+				<a href="javascript:showFindFriend();" class="qq-icon-search qq-bg-im">q</a>
+				<input id="im_small_findFriedn" type="text" value="搜索" class="qq-search-input" onFocus="inSmallFriend();"/>
+			</div>
+			
+			<div class="qq-chat-title qq-bg-im" style="border-width: 0 1px;">
+				<h5>系统</h5>
+				<div class="qq-system-info-count"><a id="im_x_xtnum" href="javascript:fn_im_big_friend();" class="color-white">0</a></div>
+			</div>
+			
+			<a class="ico-arrow-bar" href="javascript:fn_im_big_friend();" title="展开">
+				<span class="ico-arrow qq-bg-im ico-arrow-expand">&lt;</span>
+			</a>
+		</div>
+	</div>
+	<!-- 缩小的面板 end -->	
+	
+	<!-- 聊天面板、添加好友面板、消息面板 -->
+	<div id="chatBox" class="msg-alone hidden pos-abs" name="im_chatBox_">
+		<div class="im-title clearfix">
+				<ul class="full">
+					<li class="im-title-l bg-im">title</li>
+					<li class="im-title-m bg-im" id="title_name"></li>
+					<li class="im-title-r bg-im"><a title="关闭窗口" class="icon-closewin bg-im fr" onclick="hideChatBox()">关闭</a></li>
+			</ul>
+		</div>
+		<div class="im-bd wrap298 border-grey">
+			<div class="user-item" onclick="showGroupChatBox()">
+				<img id="im_img_photo" class="user-pic fl" src="" alt="头像" onclick=""/>
+				<p class="user-name fl"><a id="im_cmpName" href=""></a></p>
+				<p class="user-name fl">暂无个人说明！</p>
+			</div>
+			<div class="msg-box" id="chatPanel">
+			</div>
+			<div class="msg-add">
+				<textarea id="content_'{CURRENT-USER-ID}'"></textarea>
+				<div class="msg-add-item">
+				<a id="im_add_friend" style="float: left; display: none; margin-left: 10px; padding-top: 6px" href="javascript:void(0);" onclick="add_stranger_friend();return false;">
+					<span style="color: #6C6C6C;">+添加为好友</span>
+				</a>
+				<a id="im_chatting"><span style="color: #6C6C6C">聊天记录</span></a>
+				<input class="msg-send btn-img" type="button" value="短信" onclick="fn_chat_sub('1');" id="im_send_note"/>&nbsp;&nbsp;<input class="msg-send btn-img" type="button" value="发送" onclick="fn_chat_sub('0');" id="im_send_msg"/></div>
+			</div>
+		</div>
+	</div>
+	<div id="addFriendBox" class="msg-addfriend hidden pos-abs">
+		<div class="im-title clearfix">
+			<ul class="full">
+				<li class="im-title-l bg-im">title</li>
+				<li class="im-title-m bg-im">添加联系人</li>
+				<li class="im-title-r bg-im"><a title="关闭窗口" class="icon-closewin bg-im fr" onclick="hideAddFriendBox()">关闭</a></li>
+			</ul>
+		</div>
+		<div class="im-bd wrap298 border-grey">
+			<div class="add-number">手机号： <input type="text" id="friendPhone"/><input type="button" value="查找" onclick="fn_load_friend();"/></div>
+			<div class="addfriend-list" id="searchFriend">
+			</div>
+		</div>
+		<div id="groupChatBox" class="msg-group hidden pos-abs">
+		</div>
+	</div>
+	<div id="im_msg_all" style="display: none"></div>
+	<!-- 聊天面板、添加好友面板、消息面板 end -->
+</div>
+
+<script language="javascript" type="text/javascript">
+var friendBoxMinHt = 124;
+var sysMsgBoxMinHt = 100;
+var tabHt = 31;
+var searchHt = 32;
+var sysMsgHeaderHt = 32;
+var friendBoxHt = $("#friendBox").height();
+var sysMsgBoxHt = $("#sysMsgBox").height();
+var otherHt = 1;
+var bodyHeight = 0;
+var sumHt = tabHt + searchHt + sysMsgHeaderHt + otherHt;
+	
+$(function(){
+	$("ul.tabs").tabs("div.panes > div");
+	
+	/** 初始化主题内容容器的高度  */
+	setMainHeight();
+	
+	/** 随浏览器高度的改变而改变主题内容容器的高度  */
+	$(window).resize(function() {
+		setMainHeight();
+	});
+
+	/** 监听控制聊天面板宽屏、窄屏显示的按钮 */
+	$(".ico-arrow-bar").click(function(){
+		$("#widerPanel").toggle();
+		$("#narrowerPanel").toggle();
+		setMainHeight();
+	});
+
+	/**
+	 * +++++ 拖曳效果 ++++++
+     * 思路：标记拖曳状态dragging ,坐标位置iX, iY
+     *         mousedown:fn(){dragging = true, 记录起始坐标位置，设置鼠标捕获}
+     *         mouseover:fn(){判断如果dragging = true, 则当前坐标位置 - 记录起始坐标位置，绝对定位的元素获得差值}
+     *         mouseup:fn(){dragging = false, 释放鼠标捕获，防止冒泡}
+     */
+	var dragging = false;
+	$("#sbar").mousedown(function(e){
+		dragging = true;
+        this.setCapture && this.setCapture();
+	});
+	
+	$("#sbar").mousemove(function(e){
+		if (dragging) {
+			/* 设置好友列表、系统消息的高度  */
+			var e = e || window.event;
+			var resultY = $("#sbar").offset().top - e.pageY; /* resultY > 0鼠标向上移动； resultY > 0鼠标向下移动  */
+			friendBoxHt = $("#friendBox").height() - resultY;
+			sysMsgBoxHt = $("#sysMsgBox").height() + resultY;
+			boxHeight = $(window).height() - sumHt;
+			setHeight(friendBoxHt, sysMsgBoxHt, boxHeight);
+        }		
+	});
+
+	$("#sbar").mouseup(function(e) {
+        dragging = false;
+        $("#sbar")[0].releaseCapture();
+        e.cancelBubble = true;
+    });
+
+	//加载滚动条
+	//TINY.scroller.init('friendBox', 'scrollcontent1', 'scrollbar1', 'scroller1', 'buttonclick');
+	//TINY.scroller.init('sysMsgBox', 'im_compmessage', 'scrollbar2', 'scroller2', 'buttonclick');
+});
+
+/**
+ * 设置好友列表面板的高度，随浏览器的高度的改变而改变
+ */
+function setMainHeight() {
+	var widerPanel = $("#widerPanel")[0].style.display;
+	var narrowerPanel = $("#narrowerPanel")[0].style.display;
+	boxHeight = $(window).height() - sumHt;
+	if(( widerPanel == "" && narrowerPanel == "none") || ( widerPanel == "block" && narrowerPanel == "none")) {  /* 宽屏 */
+		var ht = boxHeight - friendBoxHt - sysMsgBoxHt;
+		friendBoxHt = friendBoxHt + ht/2;
+		sysMsgBoxHt = sysMsgBoxHt + ht/2;
+		setHeight(friendBoxHt, sysMsgBoxHt, boxHeight);
+	} else { /* 窄屏 */
+		if(boxHeight > 110) {
+			$("#friendWrap").height(boxHeight);
+		}
+	}	
+}
+
+/**
+ * 设置好友列表、系统消息高度
+ */
+function setHeight(friendBoxHt, sysMsgBoxHt, boxHeight) {
+	if(friendBoxHt > friendBoxMinHt && sysMsgBoxHt > sysMsgBoxMinHt) {
+		friendBoxHt = friendBoxHt;
+		sysMsgBoxHt = sysMsgBoxHt;
+	} else if(friendBoxHt > friendBoxMinHt && sysMsgBoxHt <= sysMsgBoxMinHt) {
+		friendBoxHt = boxHeight - sysMsgBoxMinHt;
+		sysMsgBoxHt = sysMsgBoxMinHt;
+	} else if(friendBoxHt <= friendBoxMinHt && sysMsgBoxHt > sysMsgBoxMinHt) {
+		friendBoxHt = friendBoxMinHt;
+		sysMsgBoxHt = boxHeight - friendBoxMinHt;
+	} else {
+		friendBoxHt = friendBoxMinHt;
+		sysMsgBoxHt = sysMsgBoxMinHt;
+	}
+	$("#friendBox").height(friendBoxHt);
+	$("#sysMsgBox").height(sysMsgBoxHt);
+}
+
+//当前session中用户id
+var userId	= "'{CURRENT-USER-ID}'";
+var userName = "'{CURRENT-USER-NAME}'";
+var cmpId = "'{CURRENT-COMPANY-ID}'";
+var im_server_path = "'{IM-SERVER-URL}'";
+var system_msg_path ="'{LISING-SYSTEM-URL}'";
+var IM_userId = "'{CURRENT-USER-ID}'";
+var order_server = "'{LISING-ORDER-URL}'";
+var hfs_server = "'{HFS-SERVER-URL}'";
+//用于pushlet.js的webRoot赋值
+var current_project_name = "'{CURRENT-PROJECT-URL}'";
+</script>
+<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/im/pushlet.js"></script>
+<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/im/im.js"></script>
+</script>
