@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web_front" basedir="." default="yui-compress-js-batch">
+	<description>
+		yui-compressor-js
+	</description>
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd HH:mm:ss" locale="zh" />
+	</tstamp>
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+		<fileset dir="${lib.build}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+
+		<delete dir="${deploy.resource}/${src.resources.js}" />
+
+		<!--创建deploy资源js目录 -->
+		<mkdir dir="${deploy.resource}/${src.resources.js}" />
+
+	</target>
+
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress-js-batch" depends="init">
+         
+         <echo message="${build.time}" /> 
+         
+         <!-- concat js -->
+         
+         <antcall target="cancat-js-01-02-channel-index"/>
+    
+         <antcall target="cancat-js-01-02-channel-shanxi"/>  
+           
+         <antcall target="cancat-js-03-01-product"/>
+         
+         
+         <!-- compress js -->
+         
+         <antcall target="yui-compress-js"/>
+
+         <echo message="${build.time}" /> 
+
+	</target>
+
+    <!--合并频道(首页)js文件 -->
+	<target name="cancat-js-01-02-channel-index">
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/channel-index-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">
+				     <include name="00-01-global-cookie.js" />
+                     <include name="00-01-global-jquery.js" />
+                     <include name="01-01-channel-global.js" />                     
+                     <include name="01-02-channel-index.js" />  
+			</fileset>
+		</concat>
+	</target>
+
+    <!--合并频道(山西馆页)js文件 -->
+	<target name="cancat-js-01-02-channel-shanxi">
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/channel-shanxi-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">
+				     <include name="00-01-global-cookie.js" />
+                     <include name="00-01-global-jquery.js" />
+                     <include name="01-01-channel-global.js" />  
+                     <include name="01-02-channel-shanxi.js" />                       
+			</fileset>
+		</concat>
+	</target>
+   
+	<!--合并js文件 -->
+	<target name="cancat-js-03-01-product">
+
+		<!--合并小文件为一个资源文件 -->
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/product-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">
+				     <include name="00-01-global-cookie.js" />
+                     <include name="00-01-global-jquery.js" />
+                     <include name="03-01-product-global.js" />
+			</fileset>
+		</concat>
+		
+	</target>
+
+	
+	
+	 <!--压缩js文件 -->
+	<target name="yui-compress-js" >
+		
+		<!--压缩资源文件 -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${deploy.resource}/${src.resources.js}/">
+				<include name="*.${src.resources.js}" />
+			</fileset>
+			<arg line="-jar" />
+			<arg path="${lib.build.yuicompressor}" />
+			<arg line="--charset UTF-8" />
+			<srcfile />
+			<arg line="-o" />
+			<mapper type="glob" from="*.${src.resources.js}"
+				to="${deploy.resource}/${src.resources.js}/*-min.${src.resources.js}" />
+			<targetfile />
+		</apply>
+
+	</target>
+	
+	
+
+</project>

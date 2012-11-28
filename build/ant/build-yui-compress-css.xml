@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web_front" basedir="." default="yui-compress-css-batch">
+	<description>
+		yui-compressor-css
+	</description>
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd HH:mm:ss" locale="zh" />
+	</tstamp>
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+		<fileset dir="${lib.build}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+	
+		<delete dir="${deploy.resource}/${src.resources.css}" />
+
+		<!--创建deploy资源css目录 -->
+		<mkdir dir="${deploy.resource}/${src.resources.css}" />
+
+	</target>
+
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress-css-batch" depends="init">
+         
+         <echo message="${build.time}" /> 
+         
+         <!-- concat css -->
+         
+         <antcall target="cancat-css-01-02-channel-index"/>
+    
+         <antcall target="cancat-css-01-02-channel-shanxi"/>  
+           
+         <antcall target="cancat-css-03-01-product"/>
+         
+         
+         <!-- compress css -->
+         
+         <antcall target="yui-compress-css"/>
+
+         <echo message="${build.time}" /> 
+
+	</target>
+
+    <!--合并频道(首页)css文件 -->
+	<target name="cancat-css-01-02-channel-index">
+		<concat
+			destfile="${deploy.resource}/${src.resources.css}/channel-index-src.${src.resources.css}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.css}">
+				    <include name="00-01-global-clean.css" />
+                     <include name="00-01-global-font.css" />
+                     <include name="01-01-channel-global.css" />                     
+                     <include name="01-02-channel-index.css" />  
+			</fileset>
+		</concat>
+	</target>
+
+    <!--合并频道(山西馆页)css文件 -->
+	<target name="cancat-css-01-02-channel-shanxi">
+		<concat
+			destfile="${deploy.resource}/${src.resources.css}/channel-shanxi-src.${src.resources.css}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.css}">
+				    <include name="00-01-global-clean.css" />
+                     <include name="00-01-global-font.css" />
+                     <include name="01-01-channel-global.css" />  
+                     <include name="01-02-channel-shanxi.css" />                       
+			</fileset>
+		</concat>
+	</target>
+   
+	<!--合并css文件 -->
+	<target name="cancat-css-03-01-product">
+
+		<!--合并小文件为一个资源文件 -->
+		<concat
+			destfile="${deploy.resource}/${src.resources.css}/product-src.${src.resources.css}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.css}">
+				     <include name="00-01-global-clean.css" />
+                     <include name="00-01-global-font.css" />
+                     <include name="03-01-product-global.css" />
+			</fileset>
+		</concat>
+		
+	</target>
+
+	
+	
+	 <!--压缩css文件 -->
+	<target name="yui-compress-css" >
+		
+		<!--压缩资源文件 -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${deploy.resource}/${src.resources.css}/">
+				<include name="*.${src.resources.css}" />
+			</fileset>
+			<arg line="-jar" />
+			<arg path="${lib.build.yuicompressor}" />
+			<arg line="--charset UTF-8" />
+			<srcfile />
+			<arg line="-o" />
+			<mapper type="glob" from="*.${src.resources.css}"
+				to="${deploy.resource}/${src.resources.css}/*-min.${src.resources.css}" />
+			<targetfile />
+		</apply>
+
+	</target>
+	
+	
+
+</project>

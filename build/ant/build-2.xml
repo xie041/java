@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yui-compressor-demo" basedir="." default="yui-compress">
+	<description>
+		yui-compressor
+	</description>
+
+ <!-- 得到当前日期 -->  
+    <tstamp>  
+        <format property="now.date" pattern="yyyy-MM-dd" locale="zh" />  
+    </tstamp> 
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd-HH-mm" />
+	</tstamp>
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+		<fileset dir="${lib.build}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+		<delete dir="${deploy.dir}" />
+		<mkdir dir="${deploy.resource}" />
+		
+		<echo message="${lib.build.antcontrib}" /> 
+		
+	</target>
+
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress" depends="yui-compress-js,yui-compress-css">
+		
+	</target>
+
+
+	<!--压缩合并js文件 -->
+	<target name="yui-compress-js" depends="init">
+	
+		<!-- 由于需要对css和js压缩，因此使用antcontrib ant扩展来做循环判断 -->
+		<for list="${src.resources.include}" param="resoucesPath">
+			<!-- param表示在迭代的变量,使用时为@{resourcesPath} -->
+		
+			<sequential>
+				<!--创建资源目录 -->
+				<mkdir dir="${deploy.resource}/${src.resources.js}/@{resoucesPath}"/>
+				
+				<echo message="${deploy.resource}/${src.resources.js}/@{resoucesPath}"/> 
+				
+				<!--合并小文件为一个资源文件 -->
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/@{resoucesPath}/@{resoucesPath}-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}/@{resoucesPath}">
+						<!--<exclude name="@{resoucesPath}.${src.resources.js}" />-->
+					</fileset>
+				</concat>
+				<!--压缩资源文件 -->
+				<apply executable="java" parallel="false" failonerror="true">
+					<fileset dir="${deploy.resource}/${src.resources.js}/@{resoucesPath}">
+						<include name="*.${src.resources.js}"/>
+					</fileset>
+					<arg line="-jar" />
+					<arg path="${lib.build.yuicompressor}" />
+					<arg line="--charset UTF-8" />
+					<srcfile />
+					<arg line="-o" />
+					<mapper type="glob" from="*.${src.resources.js}"
+						to="${deploy.resource}/${src.resources.js}/@{resoucesPath}/*-min.${src.resources.js}" />
+					<targetfile />
+				</apply>
+				<echo message="ssss:${deploy.resource}/${src.resources.js}/@{resoucesPath}"/> 
+				<!--
+				<apply executable="java" parallel="false" failonerror="true" >
+				
+				    <fileset dir="${deploy.resource}/${src.resources.js}/@{resoucesPath}" includes="*.js" /> 
+				
+					<arg line="-jar" />
+					<arg path="${lib.build.yuicompressor}"/>
+				
+					<srcfile />
+					<arg line="-o " />
+					<mapper type="glob" from="*.js"
+						to="${deploy.resource}/${src.resources.js}/@{resoucesPath}/@{resoucesPath}-min.${src.resources.js}"/>
+					<targetfile />
+				</apply>
+				-->
+				
+			</sequential>
+		</for>
+
+	</target>
+	
+	
+	<!--压缩合并js文件 -->
+	<target name="yui-compress-css" depends="init">
+	
+		<!-- 由于需要对css和js压缩，因此使用antcontrib ant扩展来做循环判断 -->
+		<for list="${src.resources.include}" param="resoucesPath">
+			<!-- param表示在迭代的变量,使用时为@{resourcesPath} -->
+		
+			<sequential>
+				<!--创建资源目录 -->
+				<mkdir dir="${deploy.resource}/${src.resources.css}/@{resoucesPath}"/>
+				
+				<echo message="${deploy.resource}/${src.resources.css}/@{resoucesPath}"/> 
+				
+				<!--合并小文件为一个资源文件 -->
+				<concat
+					destfile="${deploy.resource}/${src.resources.css}/@{resoucesPath}/@{resoucesPath}-src.${src.resources.css}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.css}/@{resoucesPath}">
+						<!--<exclude name="@{resoucesPath}.${src.resources.js}" />-->
+					</fileset>
+				</concat>
+				<!--压缩资源文件 -->
+				<apply executable="java" parallel="false" failonerror="true">
+					<fileset dir="${deploy.resource}/${src.resources.css}/@{resoucesPath}">
+						<include name="*.${src.resources.css}"/>
+					</fileset>
+					<arg line="-jar" />
+					<arg path="${lib.build.yuicompressor}" />
+					<arg line="--charset UTF-8" />
+					<srcfile />
+					<arg line="-o" />
+					<mapper type="glob" from="*.${src.resources.css}"
+						to="${deploy.resource}/${src.resources.css}/@{resoucesPath}/*-min.${src.resources.css}" />
+					<targetfile />
+				</apply>
+				
+				
+			</sequential>
+		</for>
+
+	</target>
+	
+	
+	
+	
+
+</project>

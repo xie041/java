@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="yui-compressor-demo" basedir="." default="yui-compress">
+	<description>
+		yui-compressor
+	</description>
+
+ <!-- 得到当前日期 -->  
+    <tstamp>  
+        <format property="now.date" pattern="yyyy-MM-dd" locale="zh" />  
+    </tstamp> 
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd-HH-mm" />
+	</tstamp>
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+		<fileset dir="${lib.build}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+		<delete dir="${deploy.dir}" />
+		<mkdir dir="${deploy.resource}" />
+		
+	</target>
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress" depends="init">
+
+        <ant antfile="build-yui-compress-css.xml" target="yui-compress-css-batch"/>
+
+        <ant antfile="build-yui-compress-js.xml" target="yui-compress-js-batch"/>
+		
+	</target>
+
+
+</project>
