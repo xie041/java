@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title><sitemesh:write property='title'/></title>
+	<link rel="icon" type="images/png" href="'{HFS-SERVER-URL}'statics/images/favorite.png"/>
+	<link rel="stylesheet" type="text/css" href="'{HFS-SERVER-URL}'statics/styles/reset.css"/>
+	<link rel="stylesheet" type="text/css" href="'{HFS-SERVER-URL}'statics/styles/util.css"/>
+	<link rel="stylesheet" type="text/css" href="'{HFS-SERVER-URL}'statics/styles/common.css"/>
+	<link rel="stylesheet" type="text/css" href="'{HFS-SERVER-URL}'statics/styles/org/modules.css"/>
+	
+	<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/scripts/jquery.1.4.2.js"></script>
+	<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/scripts/jtools/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/scripts/ztree/jquery.ztree.core-3.1.min.js"></script>
+	<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/scripts/common.js"></script>
+	<script type="text/javascript" src="'{HFS-SERVER-URL}'statics/scripts/popup/AsyncBox.v1.4.5.js" charset="utf-8" ></script>
+	<link type="text/css" rel="stylesheet" href="'{HFS-SERVER-URL}'statics/scripts/popup/skins/ZCMS/asyncbox.css"  />
+
+	<script src="'{HFS-SERVER-URL}'statics/scripts/common.js" type="text/javascript"></script>
+	<script src="'{HFS-SERVER-URL}'statics/scripts/autocomplete/jquery.autocomplete.pack.js" type="text/javascript"></script>
+	<link href="'{HFS-SERVER-URL}'statics/scripts/autocomplete/jquery.autocomplete.css" rel="stylesheet" type="text/css"/>
+	<script src="'{HFS-SERVER-URL}'statics/scripts/date/WdatePicker.js" type="text/javascript"></script>
+
+	<!-- 测试使用css -->
+	<link rel="stylesheet" type="text/css" href="'{HFS-SERVER-URL}'statics/im/styles/im.css"/>
+	<script type="text/javascript">
+		//工具条滚动消息效果---开始
+		function AutoScroll(obj){
+			$(obj).find("ul:first").animate({
+				marginTop:"-25px"
+			},1000,function(){
+				$(this).css({marginTop:"0px"}).find("li:first").appendTo(this);
+			});
+		}
+		$(document).ready(function(){
+			var autoScroll = setInterval('AutoScroll("#noticeScrollDiv")',5000);
+		});
+		
+		//清除滚动条效果
+		function clearAutoScroll(){
+			window.clearInterval(autoScroll);
+		}
+		//工具条滚动消息效果---结束
+		
+	</script>
+	
+	<sitemesh:write property='head'/>
+	
+</head>
+<body onbeforeunload="FRAME.closeExplorer();">
+	<div>
+		<div id="siteBarWrap">
+			<div class="wrap960">
+				<ul class="siteBarLeft fl">
+					<li class="siteName"><a href="javascript:void(0);" onclick="javascript:FRAME.change(''{SEARCH-INDEX-ACTION}'');">中国旅游行业网</a></li>
+					<li><li class="en"><div id="mq-tel" onmouseover="isShow_tel=0" onmouseout="isShow_tel=1">4006-000-626<br/>18604455668<br/></div></li>					
+					<li>
+						<table class="sys-notice fl">
+							<tr>
+						    	<td width="4%" valign="middle"><img src="'{HFS-SERVER-URL}'statics/images/icon-laba.gif" alt="喇叭"/></td>
+						    	<td width="15%"><strong>系统通知：</strong></td>
+						    	<td width="81%">
+						    		<div id="noticeScrollDiv">
+									    <ul id="sys_msg_list">
+									    </ul>
+									</div>
+						    	</td>
+						    </tr>
+						</table>
+					</li>
+				</ul>
+				<ul class="siteBarRight fr">
+					<li id="currentUserName">'{CURRENT-USER-NAME}'</li>
+					<li id="logoutProject" class="link-blue"><a href="javascript:void(0);" onclick="javascript:FRAME.logoutProjects(true)">[ 退出 ]</a></li>
+					<li id="myNetshop" class="link-orange"><a title="我的网店" href="javascript:void(0)" onclick="javascript:window.open(''{LISING-NETSHOP-URL}'');">[ 我的网店 ]</a></li>
+					<li><a href="javascript:void(0);" onclick="javascript:FRAME.addfavorite();">[ 加为收藏 ]</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="wrap960">
+			<div class="navHeaderWrap">
+				<h1 class="companyBrand color-blue pos-rel">
+					<img id="currentImage" class="fl"/>
+					<a id="currentHref" href="javascript:void(0)"  class="companyBrand-title">
+						<span id="currentTitle" class="fl"></span>
+					</a>
+<!--					<a class="bg-site companyBrand-link" href="#">切换部门</a>-->
+				</h1>
+			</div>
+			<div class="navContentWrap">
+				<!-- TAB标签 -->
+				<ul class="navHeader">
+					'{LEVEL-ONE-NAV-REPLACE-AREA}'
+				</ul>
+				<div class="navContent bg-site clearfix" ><!-- 除了我的资讯，其他行距变大 -->
+					<ul class="link-white clearfix fl" id="navPro">
+						'{LEVEL-TWO-NAV-REPLACE-AREA}'
+					</ul>
+					<div class="item-toolkitBox" onclick="FRAME.isShow_toolkit(0);">
+						<span class="link-toolkit color-white fl">旅游助手</span>
+						<img src="'{HFS-SERVER-URL}'statics/images/hot.gif" alt="旅游助手" class="fl"/>
+					</div>
+					<div id="toolkitBox" class="hidden">
+						<div class="pic-triangle"></div>
+						<a href="javascript:FRAME.isShow_toolkit(1);" title="关闭" class="icon-close icon-close-toolkit">关闭</a>
+						<dl>
+							<dd>
+								<p onclick="fn_tools_translate();" class="translating">翻译</p>
+								<a href="javascript:fn_tools_translate();">翻译</a>
+							</dd>
+							<dd>
+								<p onclick="fn_tools_calculator();" class="calculator">旅游计算器</p>
+								<a href="javascript:fn_tools_calculator();">旅游计算器</a>
+							</dd>
+							<dd>
+								<p onclick="linkPage('http://www.tourie.com/unicom/index.action')">旅游集团网</p>
+								<a href="http://www.tourie.com/unicom/index.action" target="_blank">中国联通<br/>旅游集团网</a>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="insurance">网上营业厅</p>
+								<span>保险<br/>网上营业厅</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="legalAdviser">法律顾问</p>
+								<span>法律顾问</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="financialBangBan">财务帮办</p>
+								<span>财务帮办</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="emergent">特快专递</p>
+								<span>特快专递</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="card">办证</p>
+								<span>办证</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="visa">签证</p>
+								<span>签证</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="nameList">名单</p>
+								<span>名单</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="invite">邀请</p>
+								<span>邀请</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="sentOff">送关</p>
+								<span>送关</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="exchangeRate">汇率</p>
+								<span>汇率</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="ad">平台广告</p>
+								<span>平台广告</span>
+							</dd>
+							<dd>
+								<p onclick="javascript:void(0);" class="sitebuild">网站建设</p>
+								<span>网站建设</span>
+							</dd>
+						</dl>
+						<!--[if IE 6]><iframe style="width: 376px; height: 285px;position:absolute;top:0;right:0;z-index:-3;filter:alpha(opacity=10);" frameborder="0" border="0"></iframe><![endif]--> 
+					</div>
+				</div>
+			</div>
+			
+			<div id="searchArea">
+				'{SEARCH-REPLACE-AREA}'
+			</div>
+		
+		<!-- processBar -->
+		<div class="qq-processbar-wrap mt10">
+			<ul class="qq-processbar">
+		 		<li class="fl">
+			 		当前位置
+			 		<div class="qq-trigon">
+			 			<span class="first"></span>
+			 			<span class="secend"></span>
+			 		</div>
+		 		</li>
+		 		'{CURRENT-NAVIGATOR-AREA}'
+		 	</ul>
+		 	<ul id="mainNav" class="qq-processbar">
+		 	</ul>
+		</div>
+		<!-- processBar end -->
+		 
+		<!--中部开始-->
+			 <div class="mt10 clearfix" sytle="height:auto;">
+			 	<sitemesh:write property='body'/>
+			</div>	
+		<!--中部结束-->
+		
+		<!--底部-->
+			<div class="mt10 mb10">
+	            <ul id="footer" >
+	                <li class="qq-links">
+	                    <a href="javascript:void(0);">TT下载</a>|<a href="javascript:void(0);">关于我们</a>|<a href="javascript:void(0);">广告服务</a>|<a href="javascript:void(0);">合作伙伴</a>|<a href="javascript:void(0);">帮助中心 </a>|<a href="javascript:void(0);">诚征英才</a>|<a href="javascript:void(0);">联系我们</a>|<a href="javascript:void(0);">网站地图</a>|<a href="javascript:void(0);">法律声明</a>|<a href="javascript:void(0);">举报建议</a>
+	                </li>
+	                <li class="en">
+	                    <span>Copyright &copy; 2008 - 2011 Tourie. All Rights Reserved</span>
+	                    <span>京ICP备11007300号</span>
+	                    <span>中国旅游行业网 <a href="javascript:void(0);">版权所有</a></span>
+	                </li>
+	            </ul>
+			</div>
+		<!--底部-->
+			
+		</div>
+	</div>
+	
+	<!--聊天区域 开始-->
+	'{IM-REPLACE-AREA}'
+	<!--聊天区域 结束-->
+<script type="text/javascript">
+	var mq_tel = document.getElementById("mq-tel"); /*滚动对象*/
+	mq_tel.innerHTML += mq_tel.innerHTML;
+	var isShow_tel = 1; /*1=滚动，0=不滚动,默认为滚动*/
+	var time_tel = 4000; /*上下滚动时间间隔 ，默认为4000ms*/
+	function callRun_tel(){
+		/*run函数中，lineCount：实际行数，lineHeight：单行高度（单位为像素）*/
+		run_upAndDown({root: mq_tel, lineCount: 2, lineHeight: 18, callRun: callRun_tel, isShow: isShow_tel, time: time_tel});
+	}
+	window.setTimeout( "callRun_tel()", time_tel );
+
+
+	var FRAME ={
+		/**权限辅助表json数据*/
+		rightAuxJson : '{AUXILIARY-RIGHT-JSON}',
+		
+		/**需要清除session的工程，逗号分隔。最后为sso地址*/
+  	   urls : "'{LOGOUT-URLS}'",
+
+		/**
+		 *确认退出系统 
+		 */
+		confirmLogout : function(isLogin,from){
+			if (FRAME.urls == "") {
+				_p.error("退出SSO服务器出错，请联系管理员!");
+				return;
+			}
+			
+			var urlArray = FRAME.urls.split(",");
+			/**循环执行*/
+			for (var i = 0, len = urlArray.length - 1; i < len; i++) {
+				try{
+					$.ajax( {  
+	                    type : 'get',  
+	                    url : urlArray[i],  
+	                    data : {catType : 1,from : from},  
+	                    dataType : 'jsonp',//跨域必须用jsonp  
+	                    error : function() {},  
+	                    success : function(data) {}  
+               		 });  
+				}catch(err){ _p.error("退出"+urlArray[i]+"出错，请联系管理员!");}	 
+			}
+			
+			if( isLogin ){
+				//1秒中之后执行sso退出调用
+				setTimeout("window.location.href = '" + urlArray[urlArray.length - 1] + "'", 1000);
+			}
+		},
+		
+		/**
+		 * 退出系统
+		 * @param boolean:isLogin,是否返回登录页面 
+		 */
+		logoutProjects  :function(isLogin,from){
+			
+			_p.confirm('是否退出?','提示:',function(action){
+			　　　if(action == 'ok'){
+			　　　　　FRAME.confirmLogout(isLogin,from);
+					//调用im工程方法，清除退出时的用户信息
+					fn_im_user_off();
+			　　　}
+				if(action == 'cancel'){
+			　　　}
+			　　　if(action == 'close'){
+			　　　}
+			　});
+		},
+		
+		
+		/**
+		 * 改变当前地址
+		 * @param {Object} url
+		 */
+		change:function(url){
+			window.location.href =   url ;
+		},
+		
+		/**
+		 * 调用远程Action，保存用户设定的皮肤
+		 * @param objId 元素Id
+		 */
+		changeSkin : function (objId){
+			$("#"+objId).addClass("skin-on").siblings().removeClass("skin-on"); //去掉其它同辈<li>元素的选中
+			$("#cssfile").attr("href","'{HFSServerIP}'statics/styles/"+objId); //设置不同皮肤
+				  
+			_p.confirm('更换皮肤后需要退出才能生效，是否退出?','提示:',function(action){
+			　　　if(action == 'ok'){
+					$.getJSON( "'{REMOTE-SKIN-ACTION}'&skin="+objId+"&callback=?", function(data) {
+						if( "1" == data['status']){
+							　FRAME.confirmLogout();
+						}else{
+							_p.error("更换皮肤失败!");
+						}
+					});
+			　　　}
+			　　　if(action == 'cancel'){
+					$("#"+objId).addClass("skin-on").siblings().removeClass("skin-on"); //去掉其它同辈<li>元素的选中
+					$("#cssfile").attr("href","'{CURRENT-SKIN-CSS}'"); //设置不同皮肤
+			　　　}
+			　　　if(action == 'close'){
+					$("#"+objId).addClass("skin-on").siblings().removeClass("skin-on"); //去掉其它同辈<li>元素的选中
+					$("#cssfile").attr("href","'{CURRENT-SKIN-CSS}'"); //设置不同皮肤
+			　　　}
+			　});
+		},
+		
+		changeURL:function(){
+			setTimeout("window.location.hash = 'UTLKAJDIX234X'",100);
+			setTimeout("window.location.search='UTLKAJDIX234X&FF=11'",100);
+		},
+		
+		/**
+		 * 退出浏览器的同时退出IM聊天系统
+		 */
+	    closeExplorer: function() 
+		{
+			var isIE = document.all?true:false;  
+        	if (isIE) {//IE浏览器  
+				var n = window.event.screenX - window.screenLeft;
+				var b = n > document.documentElement.scrollWidth - 20;
+				if (b && window.event.clientY < 0 || window.event.altKey) {
+					fn_im_user_off();
+				}
+			}
+			else {//火狐浏览器  
+				if (document.documentElement.scrollWidth != 0) {
+					fn_im_user_off();
+				}
+			}
+		},
+		
+		/**
+		 * 改变公司名称长度
+		 */
+		changeCompanyNameLength : function (){
+			var cspanObj = document.getElementById("companyName");
+			cspanObj.innerHTML = FRAME.trimString(cspanObj.innerHTML,11);
+		},
+		
+		/**
+		 * 截取指定长度的字串并添加"..."返回
+		 * @param {Object} sourceString
+		 * @param {Object} length
+		 */
+		trimString : function (sourceString,length){
+				if( sourceString == 'null' || sourceString.length == 0 ) {return "";}
+    	
+    			var tem = sourceString.trim();
+    			if( tem.length < length) {return tem;}
+    	
+    			return tem.substring(0, length-3)+"...";
+		},  
+		
+		/**
+		 * 打开个人名片
+		 */
+		openIdCard: function (){
+			_p.open({
+				modal:true,
+				title:"我的名片",
+				width:726,
+				height:450,
+				url:"'{PERSONAL-CARD-URL}'ajax/org/emp/card.do"
+			});
+		},
+		
+		/**
+		 * 根据状态展开或折叠搜索区域
+		 */
+		collapseOrExpandSearch : function (){
+			$('#searchBox').toggle();
+			$("#btn-searchSplitBar").toggleClass("down");
+		},
+		
+		/**
+		 * 加入收藏加
+		 */
+		addfavorite : function (){
+		   if (document.all){
+		      window.external.addFavorite('http://www.tourie.com','中国旅行行业网');
+		   }else if(window.wsidebar){
+		   	 window.sidebar.addPanel('中国旅行行业网', 'http://www.tourie.com', "");
+		   }
+		}, 
+	
+	/**
+	 * 显示或关闭工具箱
+	 */
+	isShow_toolkit : function ( flag_toolkit ){
+		if( flag_toolkit ==1 ) {
+			$("#toolkitBox").hide();
+		} else {
+			$("#toolkitBox").show();
+		}
+	},
+	
+	/**
+	* 根据一级导航条菜单改变标题信息。
+	* 包括：文字、图片、url等
+	*
+	*/
+	changeNavTitle : function (levelOneMenuID){
+		var json = FRAME.rightAuxJson;
+		for(var i = 0, len = json.length; i<len; i++){
+			if( parseInt(json[i].parentId) == levelOneMenuID){
+				$('#currentImage').attr('src',json[i].pictureURL);
+				$('#currentHref').attr('href',json[i].projectURL);
+				
+				if( json[i].titleText != "null" ){
+					if( !isNaN(json[i].titleText) ){
+						$('#currentTitle').html(  findCityName( parseInt( json[i].titleText ) ) );
+					}else{
+						$('#currentTitle').html( json[i].titleText );
+					}
+				}
+			}
+		}
+	},
+	
+	/**
+	* 合并导航条
+	*/
+	combineNavigator : function (){
+		if ( $("#childNav") == null ) return ;
+		$("#mainNav").empty();
+		$("#mainNav").html( $("#childNav").html() );
+	}
+ }
+</script>		 
+</body>
+</html>

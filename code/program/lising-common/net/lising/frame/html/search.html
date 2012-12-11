@@ -1,0 +1,448 @@
+ <div id="searchBox" class="searchWrap clearfix">
+    <div class="searchItem fl">
+        <div class="searchItemName">
+            <div id="curItem" class="curItem" onclick="FrameSearch.isShow_search(0);" onmouseover="FrameSearch.isShow_search(0);">
+                <label id="defaultSearchTitle">
+                	旅游计划
+                </label>
+                <a id="searchCheckbox" class="searchCheckbox bg-site"></a>
+            </div>
+        </div>
+    </div>
+	
+    <div id="items" class="hidden" onmouseout="FrameSearch.isShow_search(1);">
+        <a href="javascript:FrameSearch.isShow_search(1);" title="关闭" class="icon-close icon-close-search">关闭</a>
+        <dl class="clearfix" onmouseover="FrameSearch.isShow_search(0);">
+            <dd>
+                <p onclick="FrameSearch.changeDIV('plan','旅游计划')" class="plan">计划</p>
+                <a href="javascript:FrameSearch.changeDIV('plan','旅游计划')">计划</a>
+            </dd>
+            <dd>
+                <p class="shareDoc" onclick="FrameSearch.changeDIV('docs','共享文档');">共享文档</p>
+                <a href="javascript:FrameSearch.changeDIV('docs','共享文档');">共享文档</a>
+            </dd>
+            <dd>
+                <p onclick="FrameSearch.changeDIV('travel','旅行社');" class="travelAgency">旅行社</p>
+                <a href="javascript:FrameSearch.changeDIV('travel','旅行社');">旅行社</a>
+            </dd>
+			<dd>
+                <p class="air" onclick="FrameSearch.changeDIV('other','[机票]功能正在建设中...');">机票</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[机票]功能正在建设中...');">机票</a>
+            </dd>
+            <dd>
+                <p class="statistics" onclick="FrameSearch.changeDIV('other','[统计]功能正在建设中...');">统计</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[统计]功能正在建设中...');">统计</a>
+            </dd>
+            <dd>
+                <p onclick="FrameSearch.changeDIV('other','[资讯]功能正在建设中...');" class="news">资讯</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[资讯]功能正在建设中...');">资讯</a>
+            </dd>
+            <dd>
+                <p onclick="FrameSearch.changeDIV('other','[地图]功能正在建设中...');" class="map">地图</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[地图]功能正在建设中...');">地图</a>
+            </dd>
+            <dd>
+                <p onclick="FrameSearch.changeDIV('other','[火车]功能正在建设中...');" class="train">火车</p>
+				<a href="javascript:FrameSearch.changeDIV('other','[火车]功能正在建设中...');">火车</a>
+            </dd>
+            <dd>
+                <p onclick="FrameSearch.changeDIV('other','[问道]功能正在建设中...');" class="ask">问道</p>
+				<a href="javascript:FrameSearch.changeDIV('other','[问道]功能正在建设中...');">问道</a>
+            </dd>
+            <dd>
+                <p class="hotel" onclick="FrameSearch.changeDIV('other','[酒店]功能正在建设中...');">酒店</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[酒店]功能正在建设中...');">酒店</a>
+            </dd>
+            <dd>
+                <p class="boat" onclick="FrameSearch.changeDIV('other','[客船]功能正在建设中...');">客船</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[客船]功能正在建设中...');">客船</a>
+            </dd>
+            <dd>
+                <p class="bus" onclick="FrameSearch.changeDIV('other','[汽车]功能正在建设中...');">汽车</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[汽车]功能正在建设中...');">汽车</a>
+            </dd>
+            <dd>
+                <p class="spot" onclick="FrameSearch.changeDIV('other','[景区]功能正在建设中...');">景区</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[景区]功能正在建设中...');">景区</a>
+            </dd>
+            <dd>
+                <p class="shopping" onclick="FrameSearch.changeDIV('other','[购物]功能正在建设中...');">购物</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[购物]功能正在建设中...');">购物</a>
+            </dd>
+            <dd>
+                <p class="entertainment" onclick="FrameSearch.changeDIV('other','[休娱]功能正在建设中...');">休娱</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[休娱]功能正在建设中...');">休娱</a>
+            </dd>
+            <dd>
+                <p class="guide" onclick="FrameSearch.changeDIV('other','[餐饮]功能正在建设中...');">餐饮</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[餐饮]功能正在建设中...');">导游</a>
+            </dd>
+            <dd>
+                <p class="catering" onclick="FrameSearch.changeDIV('other','[餐饮]功能正在建设中...');">餐饮</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[餐饮]功能正在建设中...');">餐饮</a>
+            </dd>
+            <dd>
+                <p class="otherler" onclick="FrameSearch.changeDIV('other','[旅游人]功能正在建设中...');">旅游人</p>
+                <a href="javascript:FrameSearch.changeDIV('other','[旅游人]功能正在建设中...');">旅游人</a>
+            </dd>
+        </dl>
+        <!--[if IE 6]><iframe style="width: 428px; height: 272px;position:absolute;top:0;right:0;z-index:-3;filter:alpha(opacity=10);" frameborder="0" border="0"></iframe><![endif]-->
+    </div>
+	
+    <div id="dynamicForm">
+        <form action="'{SEARCH-PLAN-ACTION}'" method="get" target="_blank" id="search_form">
+        	<input type="hidden" id="search-plan-dep-city-hidden" name="planCondition.depCityValue" value=""/>
+            <table class="searchTable fl">
+                <tr>
+                    <td>
+                       	 计划名称：
+                       	 <input type="text" class="width118 border-blue" value = "" name="planCondition.tripName" tip="请输入计划名称" id="search-tripName"/>
+                    </td>
+                    <td>
+                      	  出发城市：
+                      	  <input type="text" name="planCondition.depCityName" value="北京" class="width86 border-blue" id="suggest" onchange="FrameSearch.fn_auto_citys();" onclick="FrameSearch.fn_auto_citys();" onfocus="FrameSearch.fn_auto_citys();"/>
+                    </td>
+					<td>
+						发团日期：
+						<input type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd' });" onchange="document.getElementById('endDate').value = this.value" id="startTime" class="text width90 Wdate" name="planCondition.startDate"/>
+						<input type="hidden" id="endDate" name="planCondition.endDate"/>
+					</td>
+                    <td>
+                    	发布人：
+                    	<input type="text" value="" name= "planCondition.publisher" class="width90 border-blue"/>
+                    </td>
+                </tr>
+                <tr>
+                	<td>
+                      	团质类型：
+                      	<select class="border-blue" name="planCondition.teamType" style="width:123px;">
+                            <option value="0">无要求</option>
+                            <option value="1">特价团</option>
+                            <option value="2">品质团</option>
+                            <option value="3">纯玩团</option>
+                            <option value="4">豪华团</option>
+                        </select>
+                    </td>
+                    <td>
+                       	计划类别：
+                       	<select class="border-blue" name="planCondition.planType" style="width:95px;" >
+                            <option value="">不限</option>
+							<option value="0">同业</option>
+							<option value="1">组团</option>
+							<option value="2">地接</option>
+                        </select>
+                    </td>
+                    <td>
+                      	住宿标准：
+                      	<select class="border-blue" name="planCondition.lodging" style="width:95px;">
+                            <option value="">无要求</option>
+							<option value="0">经济房</option>
+							<option value="1">二星级</option>
+							<option value="2">三星级</option>
+							<option value="3">四星级</option>
+							<option value="4">五星级</option>
+							<option value="5">六星级</option>
+							<option value="6">七星级</option>
+                        </select>
+                    </td>
+                    <td>
+                        	航空公司：
+                        <select name="planCondition.airCode" class="border-blue" style="width:95px;">
+                            <option value="">不限</option>
+							<option value="CA">中国国际航空集团</option>
+							<option value="CZ">中国南方航空集团</option>
+							<option value="MU">中国东方航空集团</option>
+							<option value="CK">中国东方航空集团中国货运航空公司</option>
+							<option value="HU">中国海南航空集团</option>
+							<option value="3U">四川航空</option>
+							<option value="SC">山东航空</option>
+							<option value="FM">上海航空</option>
+							<option value="MF">厦门航空</option>
+							<option value="ZH">深圳航空</option>
+							<option value="KN">中国联合航空</option>
+							<option value="BK">奥凯航空</option>
+							<option value="9C">春秋航空</option>
+							<option value="EU">鹰联航空</option>
+							<option value="NS">东北航空</option>
+							<option value="PN">西部航空</option>
+							<option value="OQ">重庆航空</option>
+							<option value="8L">祥鹏航空(云南航空)</option>
+							<option value="VD">鲲鹏航空</option>
+							<option value="8C">东星航空</option>
+							<option value="HO">吉祥航空</option>
+							<option value="CN">大新华航空</option>
+							<option value="GS">大新华快运</option>
+							<option value="G5">华夏航空</option>
+							<option value="DJ">金鹿航空</option>
+							<option value="J5">深圳东海货运航空</option>
+							<option value="JI">翡翠航空</option>
+							<option value="IJ">长城航空</option>
+							<option value="Y8">扬子江快运</option>
+							<option value="8Y">中国邮政航空</option>
+							<option value="GD">银河航空</option>
+                        </select>
+					</td>
+                </tr>
+            </table>
+        </form>
+    </div>
+	
+    <span class="btn-searchWrap" id="search_button">
+    	<input type="button" onclick="$('#search_form').submit()" class="bg-header btn-search btn-img"/>
+	</span>		
+</div>
+
+<div class="search-split-bar">
+	<a id="btn-searchSplitBar" class="btn-search-split-bar" title="展开" href="javascript:FRAME.collapseOrExpandSearch();">展开</a>
+</div>
+	
+<script type="text/javascript">
+var FrameSearch ={
+	/**
+	 * 控制全搜索是否显示
+	 */
+	isShow_search :function (flag){
+		if( flag == 1 ) {
+			$("#items").hide();
+			$("#searchCheckbox").removeClass("searchCheckbox-up");
+			$("#curItem").removeClass("curItem-up");
+		} else {
+			$("#items").show();
+			$("#searchCheckbox").addClass("searchCheckbox-up");
+			$("#curItem").addClass("curItem-up");
+		}
+	},
+	
+	/**
+	 * 城市智能提示
+	 * @return
+	 */
+	 fn_auto_citys:function(){
+		$("#suggest").autocomplete(citys, {
+			minChars: 0,
+			width: 200,
+			max: 10,
+			scrollHeight: 250,
+			matchContains: true,
+			//mustMatch: true,
+			autoFill: false,
+			formatItem: function(row, i, max) {
+				return "<span class='cityPinyin'>" + row[1] + "</span> : "  + row[2];
+			},
+			formatMatch: function(row, i, max) {
+				return row[2] + " " + row[3] + " " + row[1];
+			},
+			formatResult: function(row) {
+				return escape(row[1]).indexOf("%u")!=-1 ? row[1] : row[2] ;
+			}
+		})
+		.result(function(event, data) {
+			$("#search-plan-dep-city-hidden").val(data[0]);
+		});
+	},
+	
+	/**
+	 * 切换搜索项目
+	 * @param {String} which 搜索哪一个，如'plan' 
+	 * @param {String} text 文字，如”计划“
+	 */
+	changeDIV : function ( which ,text)
+	{
+		var html = "";
+		
+		if ("plan" == which) {
+			html += "<form action=\"\'{SEARCH-PLAN-ACTION}\'\" method=\"get\" target=\"_blank\" id=\"search_form\">";
+			html += "<input type=\"hidden\" id=\"search-plan-dep-city-hidden\" name=\"planCondition.depCityValue\" value=\"\"\/>";
+			html += "<table class=\"searchTable fl\">";
+			html += "<tr>";
+			html += "<td>";
+			html += "计划名称：";
+			html += "<input type=\"text\" class=\"width118 border-blue\" value = \"\" name=\"planCondition.tripName\" tip=\"请输入计划名称\" id=\"search-tripName\"\/>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "出发城市：";
+			html += "<input type=\"text\" name=\"planCondition.depCityName\" value=\"北京\" class=\"width86 border-blue\" id=\"suggest\" onchange=\"FrameSearch.fn_auto_citys();\" onclick=\"FrameSearch.fn_auto_citys();\" onfocus=\"FrameSearch.fn_auto_citys();\"\/>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "发团日期：";
+			html += "<input type=\"text\" onfocus=\"WdatePicker({dateFmt:\'yyyy-MM-dd\' });\" onchange=\"document.getElementById(\'endDate\').value = this.value\" id=\"startTime\" class=\"text width90 Wdate\" name=\"planCondition.startDate\"\/>";
+			html += "<input type=\"hidden\" id=\"endDate\" name=\"planCondition.endDate\"\/>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "发布人：";
+			html += "<input type=\"text\" value=\"\" name= \"planCondition.publisher\" class=\"width90 border-blue\"\/>";
+			html += "<\/td>";
+			html += "<\/tr>";
+			html += "<tr>";
+			html += "<td>";
+			html += "团质类型：";
+			html += "<select class=\"border-blue\" name=\"planCondition.teamType\" style=\"width:123px;\">";
+			html += "<option value=\"0\">无要求<\/option>";
+			html += "<option value=\"1\">特价团<\/option>";
+			html += "<option value=\"2\">品质团<\/option>";
+			html += "<option value=\"3\">纯玩团<\/option>";
+			html += "<option value=\"4\">豪华团<\/option>";
+			html += "<\/select>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "计划类别：";
+			html += "<select class=\"border-blue\" name=\"planCondition.planType\" style=\"width:95px;\" >";
+			html += "<option value=\"\">不限<\/option>";
+			html += "<option value=\"0\">同业<\/option>";
+			html += "<option value=\"1\">组团<\/option>";
+			html += "<option value=\"2\">地接<\/option>";
+			html += "<\/select>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "住宿标准：";
+			html += "<select class=\"border-blue\" name=\"planCondition.lodging\" style=\"width:95px;\">";
+			html += "<option value=\"\">无要求<\/option>";
+			html += "<option value=\"0\">经济房<\/option>";
+			html += "<option value=\"1\">二星级<\/option>";
+			html += "<option value=\"2\">三星级<\/option>";
+			html += "<option value=\"3\">四星级<\/option>";
+			html += "<option value=\"4\">五星级<\/option>";
+			html += "<option value=\"5\">六星级<\/option>";
+			html += "<option value=\"6\">七星级<\/option>";
+			html += "<\/select>";
+			html += "<\/td>";
+			html += "<td>";
+			html += "航空公司：";
+			html += "<select name=\"planCondition.airCode\" class=\"border-blue\" style=\"width:95px;\">";
+			html += "<option value=\"\">不限<\/option>";
+			html += "<option value=\"CA\">中国国际航空集团<\/option>";
+			html += "<option value=\"CZ\">中国南方航空集团<\/option>";
+			html += "<option value=\"MU\">中国东方航空集团<\/option>";
+			html += "<option value=\"CK\">中国东方航空集团中国货运航空公司<\/option>";
+			html += "<option value=\"HU\">中国海南航空集团<\/option>";
+			html += "<option value=\"3U\">四川航空<\/option>";
+			html += "<option value=\"SC\">山东航空<\/option>";
+			html += "<option value=\"FM\">上海航空<\/option>";
+			html += "<option value=\"MF\">厦门航空<\/option>";
+			html += "<option value=\"ZH\">深圳航空<\/option>";
+			html += "<option value=\"KN\">中国联合航空<\/option>";
+			html += "<option value=\"BK\">奥凯航空<\/option>";
+			html += "<option value=\"9C\">春秋航空<\/option>";
+			html += "<option value=\"EU\">鹰联航空<\/option>";
+			html += "<option value=\"NS\">东北航空<\/option>";
+			html += "<option value=\"PN\">西部航空<\/option>";
+			html += "<option value=\"OQ\">重庆航空<\/option>";
+			html += "<option value=\"8L\">祥鹏航空(云南航空)<\/option>";
+			html += "<option value=\"VD\">鲲鹏航空<\/option>";
+			html += "<option value=\"8C\">东星航空<\/option>";
+			html += "<option value=\"HO\">吉祥航空<\/option>";
+			html += "<option value=\"CN\">大新华航空<\/option>";
+			html += "<option value=\"GS\">大新华快运<\/option>";
+			html += "<option value=\"G5\">华夏航空<\/option>";
+			html += "<option value=\"DJ\">金鹿航空<\/option>";
+			html += "<option value=\"J5\">深圳东海货运航空<\/option>";
+			html += "<option value=\"JI\">翡翠航空<\/option>";
+			html += "<option value=\"IJ\">长城航空<\/option>";
+			html += "<option value=\"Y8\">扬子江快运<\/option>";
+			html += "<option value=\"8Y\">中国邮政航空<\/option>";
+			html += "<option value=\"GD\">银河航空<\/option>";
+			html += "<\/select>";
+			html += "<\/td>";
+			html += "<\/tr>";
+			html += "<\/table>";
+			html += "<\/form>";
+			
+			document.getElementById("dynamicForm").innerHTML = html;
+			document.getElementById("defaultSearchTitle").innerHTML = text;
+		}else if ( "docs" == which ){
+			html = "";
+			html += "<form action=\"\'{SEARCH-DOC-ACTION}'\" method=\"get\" target=\"_blank\" id=\"search_form\">";
+			html += "	<table class=\"searchTable fl mt10\">";
+			html += "		<tr>";
+			html += "			<td width=\"30%\">";
+			html += "				省份：";
+			html += "				<select class=\"border-blue\" id=\"cpid\" name=\"travelCondition.search_province\" onchange=\"loadCitysByPidAndCid(\'cpid\',\'ccid\';\" ><\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"20%\">";
+			html += "				城市：";
+			html += "				<select class=\"border-blue\" name=\"travelCondition.search_city\"  id=\"ccid\"><\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"20%\">";
+			html += "				类型：";
+			html += "				<select class=\"border-blue\"  name=\"travelCondition.search_travelType\">";
+			html += "					<option value=\"0\" >全部<\/option>";
+			html += "					<option value=\"1\" >文档<\/option>";
+			html += "					<option value=\"2\" >图片<\/option>";
+			html += "				<\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"30%\">";
+			html += "				名称：";
+			html += "				<input class=\"width118 border-blue\" id=\"search-travelName\" type=\"text\" name=\"travelCondition.search_name\" value=\"\"\/>";
+			html += "			<\/td>";
+			html += "		<\/tr>";
+			html += "	<\/table>";
+			html += "<\/form>";
+			
+			document.getElementById("dynamicForm").innerHTML = html;
+			document.getElementById("defaultSearchTitle").innerHTML = text;
+			loadByPidAndCid("cpid", "ccid");
+		}else if( "travel" == which) {
+			html = "";
+			html += "<form action=\"\'{SEARCH-TRAVEL-ACTION}'\" method=\"get\" target=\"_blank\" id=\"search_form\">";
+			html += "	<table class=\"searchTable fl mt10\">";
+			html += "		<tr>";
+			html += "			<td width=\"30%\">";
+			html += "				省份：";
+			html += "				<select class=\"border-blue\" name=\"travelCondition.search_province\" id=\"cpid\" onchange=\"loadCitysByPidAndCid(\'cpid\',\'ccid\';\" ><\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"20%\">";
+			html += "				城市：";
+			html += "				<select class=\"border-blue\" name=\"travelCondition.search_city\" id=\"ccid\"><\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"20%\">";
+			html += "				类型：";
+			html += "				<select class=\"border-blue\" name=\"travelCondition.search_travelType\">";
+			html += "					<option value=\"0\">全部<\/option>";
+			html += "					<option value=\"1\">国内社<\/option>";
+			html += "					<option value=\"2\">国际社<\/option>";
+			html += "				<\/select>";
+			html += "			<\/td>";
+			html += "			<td width=\"30%\">";
+			html += "				名称：";
+			html += "				<input class=\"width118 border-blue\" id=\"search-travelName\" type=\"text\" name=\"travelCondition.search_name\" value=\"\"\/>";
+			html += "			<\/td>";
+			html += "		<\/tr>";
+			html += "	<\/table>";
+			html += "<\/form>";
+			
+			document.getElementById("dynamicForm").innerHTML = html;
+			document.getElementById("defaultSearchTitle").innerHTML = text;
+			loadByPidAndCid("cpid", "ccid");
+		}else{
+			document.getElementById("dynamicForm").innerHTML = "&nbsp;&nbsp;&nbsp;" + text;
+		}
+		
+		FrameSearch.isShow_search(1);
+	},
+	
+	
+	/**
+	* 获取地址栏数值并填充到需要的位置
+	*/
+	getUrlParagram ： function (){  
+		
+		var location = "";
+		location = window.location.search + "";  
+		if( location.indexOf("?") != -1 )   
+		{   
+		  var str = location.split("?")[1];
+		  var strs = str.split("&");  
+		  $("[name^='planCondition.']").each(function (i) {
+			  for(i = 0 ,len = strs.length ; i < len ; i++)   
+			  {   
+				if([strs[i].split("=")[0]]== this.name) {
+					this.value =   decodeURI ( strs[i].split("=")[1] );
+				}
+			  } 
+		   })	    
+		}
+   }  
+	
+	
+}
+</script>
