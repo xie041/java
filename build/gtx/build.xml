@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web_front" basedir="." default="dist">
+	<description>
+		yui-compressor
+	</description>
+
+ <!-- 得到当前日期 -->  
+    <tstamp>  
+        <format property="now.date" pattern="yyyy-MM-dd" locale="zh" />  
+    </tstamp> 
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd-HH-mm" />
+	</tstamp>
+
+
+   <!--主要的系统环境属性-->
+    <property environment="env"/><!--取window,unix...的环境变量-->
+    <property name="java.home" value="${env.JAVA_HOME}"/>
+    <property name="ant.home"  value="${env.ANT_HOME}"/>
+
+    <!--主要的app环境属性-->
+    <property name="app.name"      value="web_front"/>
+    <property name="app.jar"       value="${app.name}.jar"/>
+    <property name="app.copyright" value=" Copyright (c) 2012 The Gongtianxia Foundation.  All rights reserved."/>
+
+
+    <!--app中src的属性-->
+
+
+    <!--app用到的lib-->
+    <property name="lib.dir" value="lib"/>
+
+
+
+    <!--app的docs目录中-->
+    <property name="docs.dir"      value="docs"/>
+
+    <!--
+    定义一组路径以后可以通过id重用这组路径 ，例：
+    <javac srcdir="src/main" destdir="build/classes">
+            <classpath refid="classpath"/>
+    </javac>
+    -->
+ 
+
+
+ <path id="build.classpath">  
+   <!--编译时要用到jboss目录下client下的所有jar包-->  
+   <fileset dir="${build.lib}">  
+    <include name="*.jar"/>  
+    <include name="dom4j-1.6.1.jar"/> 
+    
+   </fileset>  
+   <!--会用到编译目录下依赖的其它.class文件-->  
+   <!-- 
+     <pathelement path="${java.home}/lib/tools.jar"/>
+  -->
+ </path>  
+
+
+
+
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+	
+	  
+		<fileset dir="${build.lib}">
+			<include name="**/*.jar" />
+		</fileset>
+		 <!-- 
+		<fileset dir="${lib.build}" includes="**/*.jar"></fileset>   
+		 -->
+		
+		
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+		<delete dir="${deploy.dir}" />
+		<mkdir dir="${deploy.resource}" />
+		
+		<delete dir="${build.classes}" />
+		<mkdir dir="${build.classes}" />
+		
+	</target>
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress" depends="init">
+
+        <ant antfile="build-yui-compress-css.xml" target="yui-compress-css-batch"/>
+
+        <ant antfile="build-yui-compress-js.xml" target="yui-compress-js-batch"/>
+		
+	</target>
+
+
+ <!--定义一个编译任务，调用javac命令，依赖于prepare任务-->  
+ <target name="compile" depends="init" description="编译">  
+ 
+ 	<echo message="${build.lib}" /> 
+ <!-- 
+ <javac srcdir="${src.java.dir}" destdir="${build.dir}" includeantruntime="on" debug="on" classpathref="build.classpath" includes="com/gongtianxia/**">    
+
+ <compilerarg line="-encoding UTF-8"/>
+ </javac>  
+  -->
+ 
+ 
+ 
+        <javac destdir="${build.classes}" target="1.6" debug="true">
+            <src path="${src.java.dir}"/>
+            <classpath refid="build.classpath"/>
+             <compilerarg line="-encoding UTF-8"/>
+        </javac>
+ 
+ 
+</target>  
+
+
+	<!-- 压缩合并 -->
+	<target name="dist" >
+
+        <ant antfile="build.xml" target="yui-compress"/>
+
+        <ant antfile="build.xml" target="compile"/>
+		
+	</target>
+
+
+
+</project>

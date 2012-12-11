@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="web_front" basedir="." default="yui-compress-js-batch">
+	<description>
+		yui-compressor-js
+	</description>
+
+
+	<!--导入配置文件 -->
+	<property file="build.properties" />
+	<tstamp>
+		<format property="build.time" pattern="yyyy-MM-dd HH:mm:ss" locale="zh" />
+	</tstamp>
+
+	<!--设置ant-contrib.jar用于逻辑判断 -->
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+		<classpath>
+			<pathelement location="${lib.build.antcontrib}" />
+		</classpath>
+	</taskdef>
+
+	<!--设置编译环境 -->
+	<path id="build.classpath">
+		<fileset dir="${lib.build}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<!-- 创建build相关目录 -->
+	<target name="init">
+
+		<delete dir="${deploy.resource}/${src.resources.js}" />
+
+		<!--创建deploy资源js目录 -->
+		<mkdir dir="${deploy.resource}/${src.resources.js}" />
+
+	</target>
+
+
+	<!-- 压缩合并 -->
+	<target name="yui-compress-js-batch" depends="init">
+         
+         <echo message="${build.time}" /> 
+         
+         <!-- concat js -->
+         
+         <antcall target="cancat-js-01-02-channel-index"/>
+    
+         <antcall target="cancat-js-01-02-channel-shanxi"/>  
+           
+         <antcall target="cancat-js-03-01-product"/>
+		
+         <antcall target="cancat-js-04-01-category"/>
+         
+         
+         <!-- compress js -->
+         
+         <antcall target="yui-compress-js"/>
+
+         <echo message="${build.time}" /> 
+
+	</target>
+
+    <!--合并频道(首页)js文件 -->
+	<target name="cancat-js-01-02-channel-index">
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/channel-index-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">	    
+					
+					<include name="00-01-global-ad.js"   />
+					<include name="00-01-global-cart.js" />
+					<include name="00-01-global-header-nav.js"   />
+					<include name="00-01-global-search.js"   />
+					<include name="00-02-static-baidu.js" />
+					<include name="00-02-static-google.js" />
+					<include name="00-03-plugin-ntalk.js" />
+					<include name="00-01-global-swfobject.js" />
+                    <include name="01-02-channel-index.js" />  
+			</fileset>
+		</concat>
+	</target>
+
+    <!--合并频道(山西馆页)js文件 -->
+	<target name="cancat-js-01-02-channel-shanxi">
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/channel-shanxi-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+				
+					<include name="00-01-global-ad.js"   />
+					<include name="00-01-global-cart.js" />
+					<include name="00-01-global-header-nav.js"   />
+					<include name="00-01-global-search.js"   />
+					<include name="00-02-static-baidu.js" />
+					<include name="00-02-static-google.js" />
+					<include name="00-03-plugin-ntalk.js" />
+                 	<include name="01-02-channel-shanxi.js" />                       
+			</fileset>
+		</concat>
+	</target>
+	
+	 <!--合并频道(内蒙馆页)js文件 -->
+		<target name="cancat-js-01-02-channel-neimeng">
+			<concat
+				destfile="${deploy.resource}/${src.resources.js}/channel-neimeng-src.${src.resources.js}"
+				fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+				<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+					
+						<include name="00-01-global-ad.js"   />
+						<include name="00-01-global-cart.js" />
+						<include name="00-01-global-header-nav.js"   />
+						<include name="00-01-global-search.js"   />
+						<include name="00-02-static-baidu.js" />
+						<include name="00-02-static-google.js" />
+						<include name="00-03-plugin-ntalk.js" />
+	                 	<include name="01-02-channel-neimeng.js" />                       
+				</fileset>
+			</concat>
+		</target>
+	
+	 <!--合并频道(新疆馆页)js文件 -->
+		<target name="cancat-js-01-02-channel-xinjiang">
+			<concat
+				destfile="${deploy.resource}/${src.resources.js}/channel-xinjiang-src.${src.resources.js}"
+				fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+				<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+					
+						<include name="00-01-global-ad.js"   />
+						<include name="00-01-global-cart.js" />
+						<include name="00-01-global-header-nav.js"   />
+						<include name="00-01-global-search.js"   />
+						<include name="00-02-static-baidu.js" />
+						<include name="00-02-static-google.js" />
+						<include name="00-03-plugin-ntalk.js" />
+	                 	<include name="01-02-channel-xinjiang.js" />                       
+				</fileset>
+			</concat>
+		</target>
+		
+		 <!--合并频道(东北馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-dongbei">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-dongbei-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-dongbei.js" />                       
+					</fileset>
+				</concat>
+			</target>
+		
+		 <!--合并频道(宁夏馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-ningxia">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-ningxia-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-ningxia.js" />                       
+					</fileset>
+				</concat>
+			</target>
+		
+		 <!--合并频道(东盟馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-dongmeng">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-dongmeng-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-dongmeng.js" />                       
+					</fileset>
+				</concat>
+			</target>
+		
+		 <!--合并频道(闽台馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-mintai">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-mintai-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-mintai.js" />                       
+					</fileset>
+				</concat>
+			</target>
+		
+		 <!--合并频道(云南馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-yunnan">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-yunnan-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-yunnan.js" />                       
+					</fileset>
+				</concat>
+			</target>
+	
+		 <!--合并频道(青海馆页)js文件 -->
+			<target name="cancat-js-01-02-channel-qinghai">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-qinghai-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+						
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-qinghai.js" />                       
+					</fileset>
+				</concat>
+			</target>
+	
+	 <!--合并频道(广西馆页)js文件 -->
+		<target name="cancat-js-01-02-channel-guangxi">
+			<concat
+				destfile="${deploy.resource}/${src.resources.js}/channel-guangxi-src.${src.resources.js}"
+				fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+				<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+					
+						<include name="00-01-global-ad.js"   />
+						<include name="00-01-global-cart.js" />
+						<include name="00-01-global-header-nav.js"   />
+						<include name="00-01-global-search.js"   />
+						<include name="00-02-static-baidu.js" />
+						<include name="00-02-static-google.js" />
+						<include name="00-03-plugin-ntalk.js" />
+	                 	<include name="01-02-channel-guangxi.js" />                       
+				</fileset>
+			</concat>
+		</target>
+	
+	 <!--合并频道(海南馆页)js文件 -->
+		<target name="cancat-js-01-02-channel-hainan">
+			<concat
+				destfile="${deploy.resource}/${src.resources.js}/channel-hainan-src.${src.resources.js}"
+				fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+				<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+					
+						<include name="00-01-global-ad.js"   />
+						<include name="00-01-global-cart.js" />
+						<include name="00-01-global-header-nav.js"   />
+						<include name="00-01-global-search.js"   />
+						<include name="00-02-static-baidu.js" />
+						<include name="00-02-static-google.js" />
+						<include name="00-03-plugin-ntalk.js" />
+	                 	<include name="01-02-channel-hainan.js" />                       
+				</fileset>
+			</concat>
+		</target>
+		
+		 <!--合并频道(标签页)js文件 -->
+			<target name="cancat-js-08-01-tag">
+				<concat
+					destfile="${deploy.resource}/${src.resources.js}/channel-shanxi-src.${src.resources.js}"
+					fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+					<fileset dir="${src.resource.dir}/${src.resources.js}">	                 
+							
+							<include name="00-01-global-ad.js"   />
+							<include name="00-01-global-cart.js" />
+							<include name="00-01-global-header-nav.js"   />
+							<include name="00-01-global-search.js"   />
+							<include name="00-02-static-baidu.js" />
+							<include name="00-02-static-google.js" />
+							<include name="00-03-plugin-ntalk.js" />
+		                 	<include name="01-02-channel-shanxi.js" />                       
+					</fileset>
+				</concat>
+			</target>
+   
+	<!--合并js(商品终端页)文件 -->
+	<target name="cancat-js-03-01-product">
+
+		<!--合并小文件为一个资源文件 -->
+		<concat
+			destfile="${deploy.resource}/${src.resources.js}/product-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">
+				<include name="00-01-global-cart.js" />
+				<include name="00-01-global-login-popup.js" />
+				<include name="00-01-global-jquery-plugin-boxy.0.1.4.js" />
+				<include name="00-01-global-favorite.js"  />
+				<include name="00-01-global-user.js"  />
+				<include name="00-01-global-ad.js"  />
+				<include name="00-01-global-header-nav.js"  />
+				<include name="00-01-global-loading.js"  />
+				<include name="00-01-global-search.js"  />
+				<include name="00-02-static-baidu.js" />
+				<include name="00-02-static-google.js" />
+				<include name="00-03-plugin-ntalk.js" />
+				<include name="03-01-product-global.js" />
+				<include name="03-02-product-address-select.js" />
+				<include name="03-02-product-price-report.js" />
+				<include name="03-02-product-comment.js" />
+				<include name="03-02-product-consult.js" />
+				<include name="03-02-product-main-pic.js" />
+			</fileset>
+		</concat>
+		
+	</target>
+
+	<!--合并js(商品分类页)文件 -->
+	<target name="cancat-js-04-01-category">
+		<concat 
+			destfile="${deploy.resource}/${src.resoures.js}/category-src.${src.resources.js}"
+			fixlastline="true" encoding="UTF-8" outputencoding="UTF-8">
+			<fileset dir="${src.resource.dir}/${src.resources.js}">
+				<include name="00-01-global-cart.js" />
+				<include name="00-01-global-login-popup.js" />
+				<include name="00-01-global-jquery-plugin-boxy.0.1.4.js" />
+				<include name="00-01-global-favorite.js"  />
+				<include name="00-01-global-user.js"  />
+				<include name="00-01-global-ad.js"  />
+				<include name="00-01-global-header-nav.js"  />
+				<include name="00-01-global-loading.js"  />
+				<include name="00-01-global-search.js"  />
+				<include name="00-02-static-baidu.js" />
+				<include name="00-02-static-google.js" />
+				<include name="00-03-plugin-ntalk.js" />
+				<include name="04-03-plugin-ntalk.js" />
+			</fileset>
+		</concat>
+	</target>
+	
+	<target name="cancat-js-05-01-shop-category">
+	</target>
+	
+	 <!--压缩js文件 -->
+	<target name="yui-compress-js" >
+		
+		<!--压缩资源文件 -->
+		<apply executable="java" parallel="false" failonerror="true">
+			<fileset dir="${deploy.resource}/${src.resources.js}/">
+				<include name="*.${src.resources.js}" />
+			</fileset>
+			<arg line="-jar" />
+			<arg path="${lib.build.yuicompressor}" />
+			<arg line="--charset UTF-8" />
+			<srcfile />
+			<arg line="-o" />
+			<mapper type="glob" from="*.${src.resources.js}"
+				to="${deploy.resource}/${src.resources.js}/*-min.${src.resources.js}" />
+			<targetfile />
+		</apply>
+
+	</target>
+	
+	
+
+</project>
