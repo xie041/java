@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="tb_log_sms">
+  <resultMap class="com.gongtianxia.ws.sms.bo.TbLogSms" id="abatorgenerated_TbLogSmsResult">
+    <result column="LOG_ID" jdbcType="BIGINT" property="logId" />
+    <result column="CELL_PHONE" jdbcType="VARCHAR" property="cellPhone" />
+    <result column="SMS_CONTENT" jdbcType="VARCHAR" property="smsContent" />
+    <result column="MTMSGID" jdbcType="VARCHAR" property="mtmsgid" />
+    <result column="SEND_TIME" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="SEND_MTSTAT" jdbcType="VARCHAR" property="sendMtstat" />
+    <result column="SEND_MTERRCODE" jdbcType="VARCHAR" property="sendMterrcode" />
+    <result column="CALLBACK_TIME" jdbcType="TIMESTAMP" property="callbackTime" />
+    <result column="CALLBACK_MTSTAT" jdbcType="VARCHAR" property="callbackMtstat" />
+    <result column="CALLBACK_MTERRCODE" jdbcType="VARCHAR" property="callbackMterrcode" />
+  </resultMap>
+  
+  <!-- 记录短信发送情况 -->
+  <insert id="abatorgenerated_sms_log_insert" parameterClass="com.gongtianxia.ws.sms.bo.TbLogSms" >
+    insert into tb_log_sms (CELL_PHONE, SMS_CONTENT, MTMSGID, SEND_TIME, SEND_MTSTAT,SEND_MTERRCODE)
+    values (#cellPhone:VARCHAR#, #smsContent:VARCHAR#, #mtmsgid:VARCHAR#,#sendTime:TIMESTAMP#, #sendMtstat:VARCHAR#, #sendMterrcode:VARCHAR#)
+  </insert>
+  
+  <!-- 移通异步通知短信发送状态 -->
+  <update id="abatorgenerated_sms_log_update_send_status" parameterClass="com.gongtianxia.ws.sms.bo.TbLogSms">
+    UPDATE tb_log_sms SET  CALLBACK_TIME = #callbackTime:TIMESTAMP#,
+      CALLBACK_MTSTAT = #callbackMtstat:VARCHAR#,CALLBACK_MTERRCODE = #callbackMterrcode:VARCHAR#
+    WHERE MTMSGID = #mtmsgid#
+  </update>
+  
+  <!-- 短信后台查询 -->
+  <!-- 
+  	LOG_ID	bigint	
+	CELL_PHONE	varchar	11	0	
+	SMS_CONTENT	varchar	500	0	
+	MTMSGID	varchar	30	0	-1	
+	SEND_TIME	datetime	0	
+	SEND_MTSTAT	varchar	20	0	
+	SEND_MTERRCODE	varchar	20	
+	CALLBACK_TIME	datetime	
+	CALLBACK_MTSTAT	varchar	20	
+	CALLBACK_MTERRCODE	varchar	
+   -->
+  <select id="sms_log_query" resultMap="abatorgenerated_TbLogSmsResult" parameterClass="java.util.HashMap">
+  	<![CDATA[ 
+       SELECT * FROM tb_log_sms WHERE 1>0 
+    ]]>
+    <dynamic>
+    	<!-- 无限制,即所有短信 smsStatus = 0-->
+    	<!-- 待发送：表示信息还保存在随意通系统之中，有待发送给移通网络短信平台 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="1">
+    	<![CDATA[
+    		SEND_MTSTAT = 'ACCEPTD' AND CALLBACK_TIME is null
+    	]]>
+    	</isEqual>
+    	<!-- 发送完成：表示信息已经从随意通系统发送出去 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="2">
+    	<![CDATA[
+    		CALLBACK_TIME is not null
+    	]]>
+    	</isEqual>
+    	<!-- 发送成功：表示信息已经从随意通系统发送出去，并且用户成功收到 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="3">
+    	<![CDATA[
+    		CALLBACK_MTSTAT = 'DELIVRD'
+    	]]>
+    	</isEqual>
+    	<!-- 发送失败：表示信息从随意通系统发送出去的时候失败了 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="4">
+    	<![CDATA[
+    		CALLBACK_MTSTAT != 'DELIVRD'
+    	]]>
+    	</isEqual>
+    	<!-- 接收失败：表示信息从随意通系统成功发送到移通网络短信平台或者中国移动平台。但是从运营商平台发到用户手机时，用户接收失败 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="5">
+    	<![CDATA[
+    		CALLBACK_MTSTAT != 'DELIVRD'
+    	]]>
+    	</isEqual>
+    	<!-- 余额不足：表示发送信息的此用户当前余额已经用完 -->
+    	<isEqual prepend="AND" property="smsStatus" compareValue="6">
+    	<![CDATA[
+    		CALLBACK_MTSTAT = 'ET:0250'
+    	]]>
+    	</isEqual>
+    	<isNotNull prepend="AND" property="cell">
+    	<![CDATA[
+    		CELL_PHONE = #cell#
+    	]]>
+     	</isNotNull>
+    	<isNotNull prepend="AND" property="startTime">
+    	<![CDATA[
+    		SEND_TIME >= #startTime#
+    	]]>
+     	</isNotNull>
+    	<isNotNull prepend="AND" property="endTime">
+    	<![CDATA[
+    		SEND_TIME <= #endTime#
+    	]]>
+     	</isNotNull>
+    </dynamic>
+   	limit #startRow#,#pageSize#
+  </select>
+  
+  <!-- 总记录 -->
+  <select id="sms_log_total" resultClass="java.lang.Integer">
+  	 SELECT COUNT(*) FROM tb_log_sms
+  </select>
+</sqlMap>
